@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -25,21 +24,23 @@ SECRET_KEY = 'django-insecure-cnp5!qlwp(v73w3@2%39qv0cet=epfz@xw3qkn162pmj23#&qq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# 允许访问的主机
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
+# 项目的应用
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'demo.apps.DemoConfig',
+    'polls.apps.PollsConfig',  # 投票应用
+    'django.contrib.admin',  # 管理后台
+    'django.contrib.auth',  # 认证系统
+    'django.contrib.contenttypes',  # 内容类型
+    'django.contrib.sessions',  # 会话
+    'django.contrib.messages',  # 消息
+    'django.contrib.staticfiles',  # 静态文件
 ]
 
+# 中间件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,17 +72,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dawn.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'learn_django',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+        'PORT': '3306',  # 默认 MySQL 端口
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -101,25 +104,32 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# 语言代码
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+# 时区
+TIME_ZONE = 'Asia/Shanghai'
 
+# 是否使用国际化
 USE_I18N = True
 
-USE_TZ = True
-
+# 是否使用本地化
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
+
+# 静态文件目录
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+# 主键类型
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
